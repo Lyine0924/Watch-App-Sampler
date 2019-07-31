@@ -29,6 +29,8 @@
 	</dict>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>WatchAppSampler need to use health service</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>WatchAppSampler need to share health service</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>WatchAppSampler need to use location service</string>
 	<key>NSMotionUsageDescription</key>
@@ -36,6 +38,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>healthkit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

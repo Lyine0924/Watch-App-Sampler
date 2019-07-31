@@ -35,6 +35,7 @@ struct KeychainHelper {
         var keyData : AnyObject? = nil
         if SecItemCopyMatching(keychainQuery, &keyData) == noErr {
             let ret = NSKeyedUnarchiver.unarchiveObject(with: keyData as! Data)
+            //let ret = NSKeyedUnarchiver.unarchivedObject(ofClasses: self , from: keyData as! Data)
             return ret as AnyObject
         } else {
             return nil

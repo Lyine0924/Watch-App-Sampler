@@ -10,6 +10,7 @@
 
 import UIKit
 import WatchConnectivity
+import HealthKit
 
 let kWIDTH = UIScreen.main.bounds.size.width
 let kHEIGHT = UIScreen.main.bounds.size.height
@@ -61,6 +62,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if HKHealthStore.isHealthDataAvailable() {
+            let healthStore = HKHealthStore()
+            
+            let allTypes = Set([HKObjectType.workoutType(),
+                                HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                                HKObjectType.quantityType(forIdentifier: .distanceCycling)!,
+                                HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                                HKObjectType.quantityType(forIdentifier: .heartRate)!
+                ])
+            
+            healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success,error) in
+                if !success {
+                    // Handle the error here.
+                    print("requestAuthorization error occured..")
+                }
+            }
+            
+        }
 
         self.view.backgroundColor = RGB(204.0, 204.0, 204.0)
         configureWCSession()
@@ -68,6 +88,7 @@ class ViewController: UIViewController {
         view.addSubview(textField)
         view.addSubview(sendButton)
         view.addSubview(saveButton)
+        
         }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,7 +164,7 @@ class ViewController: UIViewController {
         print(cachePath)
         
         // FileManager
-        let groupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.huaxia.record")
+        let groupContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.lyine.record")
         let textURL = groupContainer!.appendingPathComponent("record.text")
         do {
             let text = "Something Write To Preferences"
@@ -153,7 +174,7 @@ class ViewController: UIViewController {
         }
         
         // UserDefaults
-        if let defaults = UserDefaults(suiteName: "group.com.dcsnail.temp") {
+        if let defaults = UserDefaults(suiteName: "group.com.lyine.temp") {
             defaults.set("0123456789", forKey: "number")
             defaults.synchronize()
             let numberString = defaults.object(forKey: "number") as! String

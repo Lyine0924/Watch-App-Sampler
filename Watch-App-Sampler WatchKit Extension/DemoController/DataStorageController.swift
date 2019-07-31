@@ -12,8 +12,8 @@ import UIKit
 
 class DataStorageController: WKInterfaceController {
     
-    let kGroupKey_1 = "group.com.dcsnail.temp"
-    let kGroupKey_2 = "group.huaxia.record"
+    let kGroupKey_1 = "group.com.lyine.temp"
+    let kGroupKey_2 = "group.lyine.record"
 
     
     override func awake(withContext context: Any?) {
